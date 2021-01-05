@@ -14,6 +14,8 @@ from pathlib import Path
 import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
+import MyShop
+
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 # Quick-start development settings - unsuitable for production
@@ -26,7 +28,6 @@ SECRET_KEY = 'lzrp#-ge)hx4y2w3#oog6kkbv%taqgivk^_6s&!%6c)j%tyk#k'
 DEBUG = True
 
 ALLOWED_HOSTS = []
-
 
 # Application definition
 
@@ -74,7 +75,6 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'MyShop.wsgi.application'
 
-
 # Database
 # https://docs.djangoproject.com/en/3.1/ref/settings/#databases
 
@@ -84,7 +84,6 @@ DATABASES = {
         'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
-
 
 # Password validation
 # https://docs.djangoproject.com/en/3.1/ref/settings/#auth-password-validators
@@ -104,7 +103,6 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-
 # Internationalization
 # https://docs.djangoproject.com/en/3.1/topics/i18n/
 
@@ -118,7 +116,6 @@ USE_L10N = True
 
 USE_TZ = True
 
-
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 
@@ -129,3 +126,21 @@ MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
 
 CART_SESSION_ID = 'cart'
+
+# EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_HOST_USER = 'odmin.test@gmail.com'
+EMAIL_HOST_PASSWORD = '12344321qSS'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+
+BROKER_URL = 'amqp://localhost'
+
+
+# from django.core.mail import send_mail
+# from orders.models import Order
+# order = Order.objects.get(id=30)
+# subject = f'Order nr. {order.id}'
+# message = f'Dear {order.first_name}. You have successfully placed an order. Your id is {order.id}'
+# send_mail(subject=subject, message=message, from_email='odmin.test@gmail.com', recipient_list=[order.email], fail_silently=False)
