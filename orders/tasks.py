@@ -1,6 +1,7 @@
 from django.core.mail import send_mail
 from .models import Order
 from celery import shared_task
+from decouple import config
 
 
 @shared_task
@@ -10,7 +11,7 @@ def order_created(order_id):
     message = f'Dear {order.first_name}. You have successfully placed an order. Your order id is {order.id}'
     send_mail(subject=subject,
               message=message,
-              from_email='odmin.test@gmail.com',
+              from_email=config('EMAIL_USER'),
               recipient_list=[order.email],
               fail_silently=False
               )
