@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/3.1/ref/settings/
 
 from pathlib import Path
 from decouple import config
+from braintree import Configuration, Environment
 import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -42,6 +43,7 @@ INSTALLED_APPS = [
     'shop',
     'cart',
     'orders',
+    'payment',
 ]
 
 MIDDLEWARE = [
@@ -138,10 +140,9 @@ EMAIL_USE_TLS = True
 
 BROKER_URL = 'amqp://localhost'
 
-
-# from django.core.mail import send_mail
-# from orders.models import Order
-# order = Order.objects.get(id=30)
-# subject = f'Order nr. {order.id}'
-# message = f'Dear {order.first_name}. You have successfully placed an order. Your id is {order.id}'
-# send_mail(subject=subject, message=message, from_email='odmin.test@gmail.com', recipient_list=[order.email], fail_silently=False)
+Configuration.configure(
+    Environment.Sandbox,  # При продакшене заменить на Environment.Production
+    config('BRAINTREE_MERCHANT_ID'),
+    config('BRAINTREE_PUBLIC_KEY'),
+    config('BRAINTREE_PRIVATE_KEY')
+)
